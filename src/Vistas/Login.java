@@ -54,6 +54,7 @@ public class Login extends javax.swing.JFrame {
         jB_salirAplicacionLoguin = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jP_Contraseña = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,7 +71,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel15.setText("Bienvenidos a");
-        IF_Login.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, -1, -1));
+        IF_Login.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel16.setText("Contraseña :");
@@ -96,8 +97,11 @@ public class Login extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel17.setText("VacunAR");
-        IF_Login.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, -1, -1));
+        IF_Login.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, -1, -1));
         IF_Login.getContentPane().add(jP_Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 190, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/contrasena (1).png"))); // NOI18N
+        IF_Login.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 160, 130));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,6 +223,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JInternalFrame IF_Login;
     private javax.swing.JButton jB_Acceder;
     private javax.swing.JButton jB_salirAplicacionLoguin;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
