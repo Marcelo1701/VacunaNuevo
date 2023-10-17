@@ -54,7 +54,7 @@ public class Login extends javax.swing.JFrame {
         jB_salirAplicacionLoguin = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jP_Contraseña = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,16 +66,16 @@ public class Login extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel14.setText("Usuario :");
-        IF_Login.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, -1));
-        IF_Login.getContentPane().add(jT_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 220, 190, -1));
+        IF_Login.getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, -1, -1));
+        IF_Login.getContentPane().add(jT_Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 190, -1));
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel15.setText("Bienvenidos a");
-        IF_Login.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, -1));
+        IF_Login.getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel16.setText("Contraseña :");
-        IF_Login.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 270, -1, -1));
+        IF_Login.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, -1, -1));
 
         jB_Acceder.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jB_Acceder.setText("Acceder");
@@ -84,7 +84,7 @@ public class Login extends javax.swing.JFrame {
                 jB_AccederActionPerformed(evt);
             }
         });
-        IF_Login.getContentPane().add(jB_Acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, -1, -1));
+        IF_Login.getContentPane().add(jB_Acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, -1, -1));
 
         jB_salirAplicacionLoguin.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jB_salirAplicacionLoguin.setText("Salir");
@@ -93,15 +93,15 @@ public class Login extends javax.swing.JFrame {
                 jB_salirAplicacionLoguinActionPerformed(evt);
             }
         });
-        IF_Login.getContentPane().add(jB_salirAplicacionLoguin, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 360, -1, -1));
+        IF_Login.getContentPane().add(jB_salirAplicacionLoguin, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel17.setText("VacunAR");
-        IF_Login.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 140, -1, -1));
-        IF_Login.getContentPane().add(jP_Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 190, -1));
+        IF_Login.getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, -1, -1));
+        IF_Login.getContentPane().add(jP_Contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, 190, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/contrasena (1).png"))); // NOI18N
-        IF_Login.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 160, 130));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/contrasena (1).png"))); // NOI18N
+        IF_Login.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 130, 130));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,12 +145,15 @@ public class Login extends javax.swing.JFrame {
         
         
         if(!usuario.equals("") && !clave.equals("")){
-            try {
+           try {
              ps = conex.Conexion_Maria().prepareStatement(sql);
                 ResultSet rs=ps.executeQuery();
                 if(rs.next()) {
                     String tipoUsuario=rs.getString("perfil");
                     if(tipoUsuario.equalsIgnoreCase("empleado")){
+                    
+                    jT_Usuario.setText("");
+                    jP_Contraseña.setText("");                      
                     dispose();
                     VacunarGUI vista=new VacunarGUI();
                     vista.setVisible(true);
@@ -158,25 +161,67 @@ public class Login extends javax.swing.JFrame {
                                     
                     jT_Usuario.setText("");
                     jP_Contraseña.setText("");
+//                    dispose();
+//                    ConsultaUsuario consulta=new ConsultaUsuario();
+//                    consulta.setVisible(true);
+                    
+                FondoConsulta consulta=new FondoConsulta();
+                consulta.setVisible(true);
+
+
+            Object[] options = {"Administrar Usuarios ", "Ingresar al Sistema"};
+        int choice = JOptionPane.showOptionDialog(null,
+                "¿Qué quieres hacer?",
+                "Perfil Administrador, Elegir una opción",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+        if (choice == JOptionPane.YES_OPTION) { //Opción que permite administrar usuarios
+                    
                     dispose();
-                    ConsultaUsuario consulta=new ConsultaUsuario();
-                    consulta.setVisible(true);      
-                                                     
-               }
+                    consulta.setVisible(false);
+                    Registro vista=new Registro();
+                    vista.setVisible(true); 
+                       
             
+        } else if (choice == JOptionPane.NO_OPTION) { //Opción que permite Ingresar al Sistema            
+            
+                    dispose();
+                    consulta.setVisible(false);
+                    VacunarGUI vista=new VacunarGUI();
+                    vista.setVisible(true);          
+            
+        }                       
+                                                     
+                }else if(tipoUsuario.equalsIgnoreCase("Sin Permisos") ){ 
+            
+                    jT_Usuario.setText("");
+                    jP_Contraseña.setText("");
+                   JOptionPane.showMessageDialog(null, "Usuario Sin Permisos para Acceder");
                 
-                }else{
+                }else {
                     jT_Usuario.setText("");
                     jP_Contraseña.setText("");
                    JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos"); 
-                }       
-            } catch (Exception e) {
+                }
+            }
+                  
+        } catch (Exception e) {
             
                    JOptionPane.showMessageDialog(null, "Error al iniciar cesión"+ e); 
-            }  
-        }else{
-            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
-        }  
+          
+            }
+          
+        } else{
+                jT_Usuario.setText("");
+                jP_Contraseña.setText("");
+                JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+        }                
+       
+        
     }//GEN-LAST:event_jB_AccederActionPerformed
 
     /**
@@ -223,11 +268,11 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JInternalFrame IF_Login;
     private javax.swing.JButton jB_Acceder;
     private javax.swing.JButton jB_salirAplicacionLoguin;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField jP_Contraseña;
     private javax.swing.JTextField jT_Usuario;
     // End of variables declaration//GEN-END:variables
