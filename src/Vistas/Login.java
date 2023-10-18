@@ -136,92 +136,84 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_salirAplicacionLoguinActionPerformed
 
     private void jB_AccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_AccederActionPerformed
-        
-        String usuario=jT_Usuario.getText();
-        String clave=jP_Contraseña.getText();
-        
-        String sql = "SELECT perfil FROM usuario WHERE mail= '"+usuario+"' AND clave= '"+clave+"'";
-        PreparedStatement ps = null;
-        
-        
-        if(!usuario.equals("") && !clave.equals("")){
-           try {
-             ps = conex.Conexion_Maria().prepareStatement(sql);
-                ResultSet rs=ps.executeQuery();
-                if(rs.next()) {
-                    String tipoUsuario=rs.getString("perfil");
-                    if(tipoUsuario.equalsIgnoreCase("empleado")){
-                    
-                    jT_Usuario.setText("");
-                    jP_Contraseña.setText("");                      
-                    dispose();
-                    VacunarGUI vista=new VacunarGUI();
-                    vista.setVisible(true);
-                }else if(tipoUsuario.equalsIgnoreCase("jefe") ){
-                                    
-                    jT_Usuario.setText("");
-                    jP_Contraseña.setText("");
-//                    dispose();
-//                    ConsultaUsuario consulta=new ConsultaUsuario();
-//                    consulta.setVisible(true);
-                    
-                FondoConsulta consulta=new FondoConsulta();
-                consulta.setVisible(true);
 
+        String usuario = jT_Usuario.getText();
+        String clave = jP_Contraseña.getText();
 
-            Object[] options = {"Administrar Usuarios ", "Ingresar al Sistema"};
-        int choice = JOptionPane.showOptionDialog(null,
-                "¿Qué quieres hacer?",
-                "Perfil Administrador, Elegir una opción",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[0]);
+        
+        if (!usuario.equals("") && !clave.equals("")) {
+            try {
+                String sql = "SELECT perfil FROM usuario WHERE mail= '" + usuario + "' AND clave= '" + clave + "'";
+                PreparedStatement ps = null;
 
-        if (choice == JOptionPane.YES_OPTION) { //Opción que permite administrar usuarios
-                    
-                    dispose();
-                    consulta.setVisible(false);
-                    Registro vista=new Registro();
-                    vista.setVisible(true); 
-                       
-            
-        } else if (choice == JOptionPane.NO_OPTION) { //Opción que permite Ingresar al Sistema            
-            
-                    dispose();
-                    consulta.setVisible(false);
-                    VacunarGUI vista=new VacunarGUI();
-                    vista.setVisible(true);          
-            
-        }                       
-                                                     
-                }else if(tipoUsuario.equalsIgnoreCase("Sin Permisos") ){ 
-            
-                    jT_Usuario.setText("");
-                    jP_Contraseña.setText("");
-                   JOptionPane.showMessageDialog(null, "Usuario Sin Permisos para Acceder");
+                ps = conex.Conexion_Maria().prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    String tipoUsuario = rs.getString("perfil");
+                    if (tipoUsuario.equalsIgnoreCase("empleado")) {
+
+                        jT_Usuario.setText("");
+                        jP_Contraseña.setText("");
+                        dispose();
+                        VacunarGUI vista = new VacunarGUI();
+                        vista.setVisible(true);
+                    } else if (tipoUsuario.equalsIgnoreCase("jefe")) {
+
+                        FondoConsulta consulta = new FondoConsulta();
+                        consulta.setVisible(true);
+
+                        Object[] options = {"Administrar Usuarios ", "Ingresar al Sistema"};
+                        int choice = JOptionPane.showOptionDialog(null,
+                                "¿Qué quieres hacer?",
+                                "Perfil Administrador, Elegir una opción",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE,
+                                null,
+                                options,
+                                options[0]);
+
+                        if (choice == JOptionPane.YES_OPTION) { //Opción que permite administrar usuarios
+
+                            dispose();
+                            consulta.setVisible(false);
+                            Registro vista = new Registro();
+                            vista.setVisible(true);
+
+                        } else if (choice == JOptionPane.NO_OPTION) { //Opción que permite Ingresar al Sistema            
+
+                            dispose();
+                            consulta.setVisible(false);
+                            VacunarGUI vista = new VacunarGUI();
+                            vista.setVisible(true);
+                        }
+                                   
                 
-                }else {
+                } else if (tipoUsuario.equalsIgnoreCase("Sin Permisos")) {
+                    
                     jT_Usuario.setText("");
                     jP_Contraseña.setText("");
-                   JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos"); 
+                    JOptionPane.showMessageDialog(null, "Usuario Sin Permisos para Acceder");
+                
                 }
+                } else {
+                    jT_Usuario.setText("");
+                    jP_Contraseña.setText("");
+                    JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos");
+                }
+
+            } catch (Exception e) {
+
+                JOptionPane.showMessageDialog(null, "Error al iniciar cesión" + e);
+
             }
-                  
-        } catch (Exception e) {
-            
-                   JOptionPane.showMessageDialog(null, "Error al iniciar cesión"+ e); 
-          
-            }
-          
-        } else{
-                jT_Usuario.setText("");
-                jP_Contraseña.setText("");
-                JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
-        }                
-       
-        
+
+        } else {
+            jT_Usuario.setText("");
+            jP_Contraseña.setText("");
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+        }
+    
+    
     }//GEN-LAST:event_jB_AccederActionPerformed
 
     /**

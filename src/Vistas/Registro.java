@@ -56,6 +56,9 @@ public class Registro extends javax.swing.JFrame {
         jB_IngresarSistema = new javax.swing.JButton();
         jB_SalirSistemaRegistro = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jB_BuscarUsuarioCorreo = new javax.swing.JButton();
+        jB_ActualizarUsuario = new javax.swing.JButton();
+        jB_limpiarCampos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,7 +97,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("Perfil :");
 
-        jC_Perfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Empleado", "Jefe", " ", " " }));
+        jC_Perfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Empleado", "Jefe", "Sin Permisos", " " }));
         jC_Perfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jC_PerfilActionPerformed(evt);
@@ -114,6 +117,7 @@ public class Registro extends javax.swing.JFrame {
         jB_GenerarUsuario.setText("Generar Usuario");
         jB_GenerarUsuario.setMaximumSize(new java.awt.Dimension(164, 33));
         jB_GenerarUsuario.setMinimumSize(new java.awt.Dimension(164, 33));
+        jB_GenerarUsuario.setPreferredSize(new java.awt.Dimension(165, 33));
         jB_GenerarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_GenerarUsuarioActionPerformed(evt);
@@ -122,6 +126,7 @@ public class Registro extends javax.swing.JFrame {
 
         jB_IngresarSistema.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jB_IngresarSistema.setText("Ingresar al Sistema");
+        jB_IngresarSistema.setPreferredSize(new java.awt.Dimension(165, 33));
         jB_IngresarSistema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_IngresarSistemaActionPerformed(evt);
@@ -132,6 +137,7 @@ public class Registro extends javax.swing.JFrame {
         jB_SalirSistemaRegistro.setText("Salir del Sistema");
         jB_SalirSistemaRegistro.setMaximumSize(new java.awt.Dimension(164, 33));
         jB_SalirSistemaRegistro.setMinimumSize(new java.awt.Dimension(164, 33));
+        jB_SalirSistemaRegistro.setPreferredSize(new java.awt.Dimension(165, 33));
         jB_SalirSistemaRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_SalirSistemaRegistroActionPerformed(evt);
@@ -141,6 +147,32 @@ public class Registro extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel8.setText("(Clave de 4 a 8 caracteres)");
 
+        jB_BuscarUsuarioCorreo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jB_BuscarUsuarioCorreo.setText("Buscar por Correo");
+        jB_BuscarUsuarioCorreo.setPreferredSize(new java.awt.Dimension(165, 33));
+        jB_BuscarUsuarioCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_BuscarUsuarioCorreoActionPerformed(evt);
+            }
+        });
+
+        jB_ActualizarUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jB_ActualizarUsuario.setText("Actualizar Usuario");
+        jB_ActualizarUsuario.setPreferredSize(new java.awt.Dimension(165, 33));
+        jB_ActualizarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_ActualizarUsuarioActionPerformed(evt);
+            }
+        });
+
+        jB_limpiarCampos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jB_limpiarCampos.setText("Limpiar Campos");
+        jB_limpiarCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_limpiarCamposActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
@@ -148,101 +180,110 @@ public class Registro extends javax.swing.JFrame {
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(350, 350, 350)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                    .addGap(163, 163, 163)
-                                    .addComponent(jLabel8))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jP_Clave, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jT_ApellidoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                .addGap(109, 109, 109)
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jP_Clave1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(231, 231, 231)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(72, 72, 72)
+                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jT_NombreRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
                                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel7))
-                                .addGap(18, 18, 18)
+                                    .addComponent(jB_ActualizarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jB_IngresarSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(84, 84, 84)
                                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jC_Perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jT_CorreoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(0, 140, Short.MAX_VALUE))
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(jB_IngresarSistema)
-                        .addGap(179, 179, 179)
-                        .addComponent(jB_SalirSistemaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(315, 315, 315)
-                        .addComponent(jB_GenerarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jB_SalirSistemaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jB_GenerarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jT_NombreRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                                .addGap(14, 14, 14)
+                                                .addComponent(jLabel7)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jC_Perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame1Layout.createSequentialGroup()
+                                                .addGap(3, 3, 3)
+                                                .addComponent(jLabel4)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jT_CorreoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGap(40, 40, 40)
+                                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                            .addComponent(jLabel3)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jT_ApellidoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jB_BuscarUsuarioCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jB_limpiarCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jInternalFrame1Layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                            .addComponent(jP_Clave1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel6)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jP_Clave, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                                            .addComponent(jLabel8)
+                                            .addGap(0, 0, Short.MAX_VALUE))))))))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(58, 58, 58)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jT_CorreoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
-                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jT_ApellidoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jT_NombreRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(27, 27, 27)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jP_Clave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jP_Clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jC_Perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))))
-                .addGap(51, 51, 51)
-                .addComponent(jB_GenerarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(47, 47, 47)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jT_ApellidoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jT_NombreRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jB_BuscarUsuarioCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jT_CorreoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(14, 14, 14)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jC_Perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jB_limpiarCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jP_Clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jP_Clave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addGap(23, 23, 23)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jB_GenerarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jB_ActualizarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jB_IngresarSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jB_SalirSistemaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jInternalFrame1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,8 +347,7 @@ public class Registro extends javax.swing.JFrame {
         String tipoUsuario=jC_Perfil.getSelectedItem().toString();   
                         
          
-
-    if (nombre.isEmpty() || apellido.isEmpty() || mail.isEmpty() || pas1.isEmpty() || pas.isEmpty()) {
+        if (nombre.isEmpty() || apellido.isEmpty() || mail.isEmpty() || pas1.isEmpty() || pas.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Se deben completar todos los campos");
     } else if (tipoUsuario.equalsIgnoreCase("Seleccionar")) {
         JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de Perfil");
@@ -316,23 +356,116 @@ public class Registro extends javax.swing.JFrame {
     } else if (pas1.length() < 4 || pas1.length() > 8) {
         JOptionPane.showMessageDialog(null, "La clave debe tener entre 4 y 8 caracteres");
     } else {
-        // Si todas las condiciones anteriores son verdaderas, entonces las claves son iguales
+        
         String sql = "INSERT INTO usuario (Nombre, Apellido, mail, clave, perfil) VALUES ('" + nombre + "','" + apellido + "','" + mail + "','" + pas + "','" + tipoUsuario + "')";
 
         try {
-            Connection conn = conex.Conexion_Maria();  // Asegúrate de obtener la conexión a la base de datos desde conex.Conexion_Maria()
+            Connection conn = conex.Conexion_Maria();  
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             limpiar();
             JOptionPane.showMessageDialog(null, "Usuario cargado correctamente");
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo cargar el usuario: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "No se pudo cargar el usuario. Correo ya existe en base de datos");
         }
     }  
                                       
     }//GEN-LAST:event_jB_GenerarUsuarioActionPerformed
 
+    
+    
+    private void jB_BuscarUsuarioCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_BuscarUsuarioCorreoActionPerformed
+        
+                               
+        String mail=jT_CorreoRegistro.getText();    
+          
+        
+        if (mail.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Se deben completar el campo Correo");
+        
+      } else {  
+        String sql = "SELECT * FROM usuario WHERE mail=?";
+        PreparedStatement ps = null;
+
+        try {
+            ps = conex.Conexion_Maria().prepareStatement(sql);
+            ps.setString(1, mail);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                                               
+                jT_NombreRegistro.setText(rs.getString("Nombre"));
+                jT_ApellidoRegistro.setText(rs.getString("Apellido"));
+                jT_CorreoRegistro.setText(rs.getString("mail"));
+                jP_Clave1.setText(rs.getString("clave"));
+                jP_Clave.setText(rs.getString("clave"));
+                               
+                String perfil = rs.getString("perfil");
+                jC_Perfil.setSelectedItem(perfil);           
+                     
+                             
+            }else {
+                JOptionPane.showMessageDialog(null, "Usuario no registrado en Base de Datos");
+                ps.close();
+            }
+           
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Usuario " + ex.getMessage());
+            System.out.println("Error: " + ex);
+       }
+     
+    }
+        
+    }//GEN-LAST:event_jB_BuscarUsuarioCorreoActionPerformed
+
+    private void jB_limpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_limpiarCamposActionPerformed
+       
+        limpiar();                   
+        
+    }//GEN-LAST:event_jB_limpiarCamposActionPerformed
+
+    private void jB_ActualizarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_ActualizarUsuarioActionPerformed
+        
+        String nombre=jT_NombreRegistro.getText();
+        String apellido=jT_ApellidoRegistro.getText();
+        String mail=jT_CorreoRegistro.getText();
+        
+        String pas=jP_Clave.getText();
+        String tipoUsuario=jC_Perfil.getSelectedItem().toString();       
+              
+        
+        
+        
+        String sql = "UPDATE usuario SET Nombre=?, Apellido=?, clave=?, perfil=? WHERE mail=?";
+    try {
+        PreparedStatement ps = conex.Conexion_Maria().prepareStatement(sql);
+        ps.setString(1, nombre);
+        ps.setString(2, apellido);
+        ps.setString(3, pas);
+        ps.setString(4, tipoUsuario);
+        ps.setString(5, mail);
+        
+
+        int exito = ps.executeUpdate();
+
+        if (exito == 1) {
+            JOptionPane.showMessageDialog(null, "Usuario modificado Exitosamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "El Usuario no existe en la Base de Datos");
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al modificar el Usuario: " + ex.getMessage());
+        System.out.println("Error: " + ex);
+    }
+        
+              
+    }//GEN-LAST:event_jB_ActualizarUsuarioActionPerformed
+        
+           
+    
     void limpiar(){
     jT_NombreRegistro.setText("");
     jT_ApellidoRegistro.setText("");
@@ -388,9 +521,12 @@ public class Registro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jB_ActualizarUsuario;
+    private javax.swing.JButton jB_BuscarUsuarioCorreo;
     private javax.swing.JButton jB_GenerarUsuario;
     private javax.swing.JButton jB_IngresarSistema;
     private javax.swing.JButton jB_SalirSistemaRegistro;
+    private javax.swing.JButton jB_limpiarCampos;
     private javax.swing.JComboBox<String> jC_Perfil;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
