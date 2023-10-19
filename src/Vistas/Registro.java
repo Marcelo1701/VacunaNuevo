@@ -14,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -68,7 +70,7 @@ public class Registro extends javax.swing.JFrame {
         jInternalFrame1.setVisible(true);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel1.setText("Registro de usuarios");
+        jLabel1.setText("Administar Usuarios");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setText("Nombre :");
@@ -118,6 +120,11 @@ public class Registro extends javax.swing.JFrame {
         jB_GenerarUsuario.setMaximumSize(new java.awt.Dimension(164, 33));
         jB_GenerarUsuario.setMinimumSize(new java.awt.Dimension(164, 33));
         jB_GenerarUsuario.setPreferredSize(new java.awt.Dimension(165, 33));
+        jB_GenerarUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jB_GenerarUsuarioFocusLost(evt);
+            }
+        });
         jB_GenerarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_GenerarUsuarioActionPerformed(evt);
@@ -190,10 +197,11 @@ public class Registro extends javax.swing.JFrame {
                                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jB_ActualizarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jB_IngresarSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(84, 84, 84)
+                                .addGap(67, 67, 67)
                                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jB_SalirSistemaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jB_GenerarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jB_GenerarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jB_SalirSistemaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(17, 17, 17))
                             .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(jInternalFrame1Layout.createSequentialGroup()
                                     .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,6 +357,10 @@ public class Registro extends javax.swing.JFrame {
          
         if (nombre.isEmpty() || apellido.isEmpty() || mail.isEmpty() || pas1.isEmpty() || pas.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Se deben completar todos los campos");
+    } else if (!validarLetras(nombre.trim()) || (!validarLetras(apellido.trim()))){
+        JOptionPane.showMessageDialog(null, "Los campos Nombre y Apellido solo aceptan letras");
+    } else if (!validarCorreo(mail.trim())) {
+        JOptionPane.showMessageDialog(null, "Se debe ingresar un Correo correcto");       
     } else if (tipoUsuario.equalsIgnoreCase("Seleccionar")) {
         JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de Perfil");
     } else if (!pas1.equals(pas)) {
@@ -374,6 +386,29 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_jB_GenerarUsuarioActionPerformed
 
     
+      
+    public boolean validarLetras(String datos){
+    
+    return datos.matches("[a-zA-Z]*");
+    }
+    
+    
+    
+    public boolean validarCorreo(String correo) {
+   
+        Pattern pat = null;
+        Matcher mat = null;
+        
+        pat = Pattern.compile("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+    //pat = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$");
+    mat = pat.matcher(correo);
+       if (mat.find()){
+       return true;
+    }else{
+        return false;
+    }
+}
+    
     
     private void jB_BuscarUsuarioCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_BuscarUsuarioCorreoActionPerformed
         
@@ -383,7 +418,8 @@ public class Registro extends javax.swing.JFrame {
         
         if (mail.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Se deben completar el campo Correo");
-        
+      } else if (!validarCorreo(mail.trim())) {
+        JOptionPane.showMessageDialog(null, "Se debe ingresar un Correo correcto");  
       } else {  
         String sql = "SELECT * FROM usuario WHERE mail=?";
         PreparedStatement ps = null;
@@ -433,9 +469,8 @@ public class Registro extends javax.swing.JFrame {
         
         String pas=jP_Clave.getText();
         String tipoUsuario=jC_Perfil.getSelectedItem().toString();       
-              
-        
-        
+          
+               
         
         String sql = "UPDATE usuario SET Nombre=?, Apellido=?, clave=?, perfil=? WHERE mail=?";
     try {
@@ -463,6 +498,48 @@ public class Registro extends javax.swing.JFrame {
         
               
     }//GEN-LAST:event_jB_ActualizarUsuarioActionPerformed
+
+    private void jB_GenerarUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jB_GenerarUsuarioFocusLost
+        
+//        String nombre=jT_NombreRegistro.getText();
+//        String apellido=jT_ApellidoRegistro.getText();
+//        String mail=jT_CorreoRegistro.getText();
+//        String pas1=jP_Clave1.getText();
+//        String pas=jP_Clave.getText();
+//        String tipoUsuario=jC_Perfil.getSelectedItem().toString();   
+//                        
+//         
+//        if (nombre.isEmpty() || apellido.isEmpty() || mail.isEmpty() || pas1.isEmpty() || pas.isEmpty()) {
+//        JOptionPane.showMessageDialog(null, "Se deben completar todos los campos");
+//    } else if (!validarLetras(nombre.trim()) || (!validarLetras(apellido.trim()))){
+//        JOptionPane.showMessageDialog(null, "Los campos Nombre y Apellido solo aceptan letras");
+//    } else if (!validarCorreo(mail.trim())) {
+//        JOptionPane.showMessageDialog(null, "Sintaxis de Correo incorrecta");
+//        
+//    } else if (tipoUsuario.equalsIgnoreCase("Seleccionar")) {
+//        JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de Perfil");
+//    } else if (!pas1.equals(pas)) {
+//        JOptionPane.showMessageDialog(null, "Las claves no son iguales");
+//    } else if (pas1.length() < 4 || pas1.length() > 8) {
+//        JOptionPane.showMessageDialog(null, "La clave debe tener entre 4 y 8 caracteres");
+//    } else {
+//        
+//        String sql = "INSERT INTO usuario (Nombre, Apellido, mail, clave, perfil) VALUES ('" + nombre + "','" + apellido + "','" + mail + "','" + pas + "','" + tipoUsuario + "')";
+//
+//        try {
+//            Connection conn = conex.Conexion_Maria();  
+//            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//            ps.executeUpdate();
+//            ResultSet rs = ps.getGeneratedKeys();
+//            limpiar();
+//            JOptionPane.showMessageDialog(null, "Usuario cargado correctamente");
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "No se pudo cargar el usuario. Correo ya existe en base de datos");
+//        }
+//    }  
+
+
+    }//GEN-LAST:event_jB_GenerarUsuarioFocusLost
         
            
     
