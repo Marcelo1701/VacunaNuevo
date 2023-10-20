@@ -475,11 +475,14 @@ public class Registro extends javax.swing.JFrame {
         String nombre=jT_NombreRegistro.getText();
         String apellido=jT_ApellidoRegistro.getText();
         String mail=jT_CorreoRegistro.getText();
-        
+        String pas1=jP_Clave.getText();
         String pas=jP_Clave.getText();
         String tipoUsuario=jC_Perfil.getSelectedItem().toString();       
           
-               
+    //if (nombre.isEmpty() || apellido.isEmpty() || mail.isEmpty() || pas1.isEmpty() || pas.isEmpty()) {
+       // JOptionPane.showMessageDialog(null, "Se deben completar todos los campos");
+        
+        
         
         String sql = "UPDATE usuario SET Nombre=?, Apellido=?, clave=?, perfil=? WHERE mail=?";
     try {
