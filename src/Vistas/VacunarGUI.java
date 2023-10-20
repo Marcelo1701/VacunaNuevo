@@ -1,12 +1,16 @@
 package Vistas;
 
+import AccesoADatos.CitaVacunacionData;
 import AccesoADatos.CiudadanoData;
 import AccesoADatos.LaboratorioData;
 import AccesoADatos.VacunaData;
+import Entidades.CitaVacunacion;
 import Entidades.Ciudadano;
 import Entidades.Laboratorio;
 import Entidades.Vacuna;
 import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatCyanLightIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 import java.awt.Color;
 import java.awt.Component;
 import java.time.LocalDate;
@@ -20,12 +24,18 @@ import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 
 public class VacunarGUI extends javax.swing.JFrame {
-    
+            
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public VacunarGUI() {
         initComponents();
@@ -47,6 +57,7 @@ public class VacunarGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel14 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
         IF_Paciente = new javax.swing.JInternalFrame();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -90,6 +101,7 @@ public class VacunarGUI extends javax.swing.JFrame {
         JT_EmailLab = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         JT_TelefonoLab = new javax.swing.JTextField();
+        JL_Lab = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         IF_Vacuna = new javax.swing.JInternalFrame();
         jLabel23 = new javax.swing.JLabel();
@@ -111,36 +123,36 @@ public class VacunarGUI extends javax.swing.JFrame {
         LB_EstadoVacuna = new javax.swing.JLabel();
         JDC_VencimientoVacuna = new com.toedter.calendar.JDateChooser();
         JCB_CuitsLabs = new javax.swing.JComboBox<>();
-        jLabel25 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
         IF_Admin = new javax.swing.JInternalFrame();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
-        JT_Apellido3 = new javax.swing.JTextField();
+        JT_Turno = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
-        JT_Edad3 = new javax.swing.JTextField();
+        JT_DniPacienteAdmin = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
-        JT_Celular5 = new javax.swing.JTextField();
+        JT_CodRefuerzo = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
-        JT_ResponsableLegal5 = new javax.swing.JTextField();
-        BTN_BuscarPaciente3 = new javax.swing.JButton();
+        JT_CentroVacu = new javax.swing.JTextField();
+        BTN_BuscarTurno = new javax.swing.JButton();
         jLabel36 = new javax.swing.JLabel();
-        JT_Celular6 = new javax.swing.JTextField();
-        JT_ResponsableLegal6 = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
-        LB_EstadoPaciente2 = new javax.swing.JLabel();
-        BTN_NuevoPaciente3 = new javax.swing.JButton();
-        BTN_GuardarActualizarPaciente3 = new javax.swing.JButton();
+        BTN_NuevoTurno = new javax.swing.JButton();
+        BTN_GuardarActualizarTurno = new javax.swing.JButton();
+        LB_Admin = new javax.swing.JLabel();
+        JDC_FechaHoraColoc = new com.toedter.calendar.JDateChooser();
+        JC_NroSerieDosisAdmin = new javax.swing.JComboBox<>();
+        JT_NroSerieVacunas = new javax.swing.JTextField();
         jLabel38 = new javax.swing.JLabel();
         IF_Consultas = new javax.swing.JInternalFrame();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        JT_Consultas = new javax.swing.JTable();
+        JC_Consultas = new javax.swing.JComboBox<>();
         IF_Ayuda = new javax.swing.JInternalFrame();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        jTextArea1 = new javax.swing.JTextArea();
         MenuFlotante = new javax.swing.JMenuBar();
         JM_Paciente = new javax.swing.JMenu();
         MI_Paciente = new javax.swing.JMenuItem();
@@ -164,6 +176,8 @@ public class VacunarGUI extends javax.swing.JFrame {
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("PACIENTE");
 
+        jLabel40.setText("FECHA HORARIO COLOCACIÓN");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(900, 700));
         setPreferredSize(new java.awt.Dimension(1000, 690));
@@ -183,15 +197,15 @@ public class VacunarGUI extends javax.swing.JFrame {
         jLabel3.setText("PACIENTE");
         IF_Paciente.getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 868, 60));
 
-        jLabel4.setText("DNI");
-        IF_Paciente.getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 20, 40));
+        jLabel4.setText("DNI *");
+        IF_Paciente.getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 30, 40));
 
         JT_Ocupacion.setColumns(1);
         JT_Ocupacion.setName("Ocupación"); // NOI18N
         IF_Paciente.getContentPane().add(JT_Ocupacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 490, 180, 30));
 
-        jLabel5.setText("NOMBRE");
-        IF_Paciente.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 50, 40));
+        jLabel5.setText("NOMBRE *");
+        IF_Paciente.getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 60, 40));
 
         jLabel6.setText("EMAIL");
         IF_Paciente.getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 40, 40));
@@ -233,14 +247,14 @@ public class VacunarGUI extends javax.swing.JFrame {
         JT_ResponsableLegal.setName("Responsable Legal"); // NOI18N
         IF_Paciente.getContentPane().add(JT_ResponsableLegal, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 420, 180, 30));
 
-        jLabel10.setText("APELLIDO");
-        IF_Paciente.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, 60, 40));
+        jLabel10.setText("APELLIDO *");
+        IF_Paciente.getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, 70, 40));
 
-        jLabel11.setText("EDAD");
+        jLabel11.setText("EDAD *");
         IF_Paciente.getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, 40, 40));
 
-        jLabel12.setText("CELULAR");
-        IF_Paciente.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 60, 40));
+        jLabel12.setText("CELULAR *");
+        IF_Paciente.getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 70, 40));
 
         jLabel13.setText("RESPONSABLE LEGAL");
         IF_Paciente.getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 420, 130, 40));
@@ -251,7 +265,7 @@ public class VacunarGUI extends javax.swing.JFrame {
                 BTN_BuscarPacienteActionPerformed(evt);
             }
         });
-        IF_Paciente.getContentPane().add(BTN_BuscarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 520, 270, 60));
+        IF_Paciente.getContentPane().add(BTN_BuscarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 480, 280, 50));
 
         BTN_GuardarActualizarPaciente.setText("GUARDAR | ACTUALIZAR");
         BTN_GuardarActualizarPaciente.addActionListener(new java.awt.event.ActionListener() {
@@ -274,7 +288,8 @@ public class VacunarGUI extends javax.swing.JFrame {
         IF_Paciente.getContentPane().add(RB_EstadoPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 550, 80, -1));
 
         LB_EstadoPaciente.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        IF_Paciente.getContentPane().add(LB_EstadoPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 540, 280, 40));
+        LB_EstadoPaciente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        IF_Paciente.getContentPane().add(LB_EstadoPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, 280, 40));
 
         jLabel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 255)));
         IF_Paciente.getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 820, 420));
@@ -360,8 +375,13 @@ public class VacunarGUI extends javax.swing.JFrame {
         JT_TelefonoLab.setName("Teléfono"); // NOI18N
         IF_Laboratorio.getContentPane().add(JT_TelefonoLab, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 350, 180, 30));
 
+        JL_Lab.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        JL_Lab.setForeground(new java.awt.Color(0, 204, 0));
+        JL_Lab.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        IF_Laboratorio.getContentPane().add(JL_Lab, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 546, 250, 30));
+
         jLabel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 255)));
-        IF_Laboratorio.getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 810, 350));
+        IF_Laboratorio.getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 810, 360));
 
         getContentPane().add(IF_Laboratorio);
 
@@ -387,26 +407,26 @@ public class VacunarGUI extends javax.swing.JFrame {
 
         JT_CuitLabVacuna.setColumns(1);
         JT_CuitLabVacuna.setName("Cuit Laboratorio"); // NOI18N
-        IF_Vacuna.getContentPane().add(JT_CuitLabVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 180, 30));
+        IF_Vacuna.getContentPane().add(JT_CuitLabVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 290, 180, 30));
 
         jLabel26.setText("CUIT LABORATORIO");
-        IF_Vacuna.getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, 40));
+        IF_Vacuna.getContentPane().add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, -1, 40));
 
         jLabel27.setText("NOMBRE VACUNA");
-        IF_Vacuna.getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, -1, 40));
+        IF_Vacuna.getContentPane().add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, 40));
 
         JT_NomVacuna.setColumns(1);
         JT_NomVacuna.setName("Nombre Vacuna"); // NOI18N
-        IF_Vacuna.getContentPane().add(JT_NomVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 180, 30));
+        IF_Vacuna.getContentPane().add(JT_NomVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 180, 30));
 
         JT_MarcaVacuna.setColumns(1);
         JT_MarcaVacuna.setName("Marca"); // NOI18N
-        IF_Vacuna.getContentPane().add(JT_MarcaVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 180, 30));
+        IF_Vacuna.getContentPane().add(JT_MarcaVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 430, 180, 30));
 
         jLabel28.setText("MARCA");
-        IF_Vacuna.getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, -1, 40));
+        IF_Vacuna.getContentPane().add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, -1, 40));
 
-        BTN_NuevaVacuna.setText("NUEVA VACUNA");
+        BTN_NuevaVacuna.setText("NUEVA VACUNA | BUSCAR VACUNA");
         BTN_NuevaVacuna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTN_NuevaVacunaActionPerformed(evt);
@@ -423,7 +443,7 @@ public class VacunarGUI extends javax.swing.JFrame {
         IF_Vacuna.getContentPane().add(BTN_GuardarActualizarVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 280, 60));
 
         jLabel29.setText("LABORATORIOS");
-        IF_Vacuna.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 380, 100, 40));
+        IF_Vacuna.getContentPane().add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 350, 100, 40));
 
         jLabel30.setText("MEDIDA");
         IF_Vacuna.getContentPane().add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, -1, 40));
@@ -438,27 +458,33 @@ public class VacunarGUI extends javax.swing.JFrame {
                 BTN_BuscarVacunaActionPerformed(evt);
             }
         });
-        IF_Vacuna.getContentPane().add(BTN_BuscarVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 470, 340, 50));
+        IF_Vacuna.getContentPane().add(BTN_BuscarVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 420, 350, 50));
 
         RB_EstadoVacuna.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         RB_EstadoVacuna.setText("APLICACIÓN");
-        IF_Vacuna.getContentPane().add(RB_EstadoVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 120, -1));
+        IF_Vacuna.getContentPane().add(RB_EstadoVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 500, 120, -1));
 
         LB_EstadoVacuna.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        IF_Vacuna.getContentPane().add(LB_EstadoVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, 190, 40));
+        LB_EstadoVacuna.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        IF_Vacuna.getContentPane().add(LB_EstadoVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 500, 290, 40));
 
         JDC_VencimientoVacuna.setBackground(new java.awt.Color(0, 0, 0));
         JDC_VencimientoVacuna.setDateFormatString("yyyy-MM-dd");
         JDC_VencimientoVacuna.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        IF_Vacuna.getContentPane().add(JDC_VencimientoVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 290, 180, 40));
+        IF_Vacuna.getContentPane().add(JDC_VencimientoVacuna, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 180, 40));
 
-        IF_Vacuna.getContentPane().add(JCB_CuitsLabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, 180, 40));
+        JCB_CuitsLabs.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                JCB_CuitsLabsItemStateChanged(evt);
+            }
+        });
+        IF_Vacuna.getContentPane().add(JCB_CuitsLabs, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 350, 180, 40));
+
+        jLabel39.setText("VENCIMIENTO");
+        IF_Vacuna.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, -1, 40));
 
         jLabel25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 255)));
         IF_Vacuna.getContentPane().add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 810, 370));
-
-        jLabel39.setText("VENCIMIENTO");
-        IF_Vacuna.getContentPane().add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, -1, 40));
 
         getContentPane().add(IF_Vacuna);
 
@@ -473,71 +499,72 @@ public class VacunarGUI extends javax.swing.JFrame {
         jLabel31.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel31.setText("ADMINISTRACIÓN");
-        IF_Admin.getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 868, 94));
+        IF_Admin.getContentPane().add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 868, 60));
 
         jLabel32.setText("N° TURNO");
-        IF_Admin.getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, 40));
+        IF_Admin.getContentPane().add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, 40));
 
-        JT_Apellido3.setColumns(1);
-        IF_Admin.getContentPane().add(JT_Apellido3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 180, 30));
+        JT_Turno.setColumns(1);
+        IF_Admin.getContentPane().add(JT_Turno, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 180, 30));
 
         jLabel33.setText("DNI PACIENTE");
-        IF_Admin.getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, -1, 40));
+        IF_Admin.getContentPane().add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, -1, 40));
 
-        JT_Edad3.setColumns(1);
-        IF_Admin.getContentPane().add(JT_Edad3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 180, 30));
+        JT_DniPacienteAdmin.setColumns(1);
+        IF_Admin.getContentPane().add(JT_DniPacienteAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 180, 30));
 
         jLabel34.setText("CÓDIGO REFUERZO");
-        IF_Admin.getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, -1, 40));
+        IF_Admin.getContentPane().add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, -1, 40));
 
-        JT_Celular5.setColumns(1);
-        IF_Admin.getContentPane().add(JT_Celular5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, 180, 30));
+        JT_CodRefuerzo.setColumns(1);
+        IF_Admin.getContentPane().add(JT_CodRefuerzo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 180, 30));
 
         jLabel35.setText("CENTRO VACUNACIÓN");
-        IF_Admin.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, 40));
+        IF_Admin.getContentPane().add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, -1, 40));
 
-        JT_ResponsableLegal5.setColumns(1);
-        IF_Admin.getContentPane().add(JT_ResponsableLegal5, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 180, 30));
+        JT_CentroVacu.setColumns(1);
+        IF_Admin.getContentPane().add(JT_CentroVacu, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 440, 180, 30));
 
-        BTN_BuscarPaciente3.setText("BUSCAR TURNO");
-        BTN_BuscarPaciente3.addActionListener(new java.awt.event.ActionListener() {
+        BTN_BuscarTurno.setText("BUSCAR TURNO");
+        BTN_BuscarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_BuscarPaciente3ActionPerformed(evt);
+                BTN_BuscarTurnoActionPerformed(evt);
             }
         });
-        IF_Admin.getContentPane().add(BTN_BuscarPaciente3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 340, 100));
+        IF_Admin.getContentPane().add(BTN_BuscarTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 420, 330, 70));
 
         jLabel36.setText("FECHA HORARIO COLOCACIÓN");
-        IF_Admin.getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, -1, 40));
-
-        JT_Celular6.setColumns(1);
-        IF_Admin.getContentPane().add(JT_Celular6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 320, 180, 30));
-
-        JT_ResponsableLegal6.setColumns(1);
-        IF_Admin.getContentPane().add(JT_ResponsableLegal6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 390, 180, 30));
+        IF_Admin.getContentPane().add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 240, -1, 40));
 
         jLabel37.setText("N° SERIE DOSIS");
-        IF_Admin.getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 390, -1, 40));
-        IF_Admin.getContentPane().add(LB_EstadoPaciente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, 190, 30));
+        IF_Admin.getContentPane().add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 300, -1, 40));
 
-        BTN_NuevoPaciente3.setText("NUEVO TURNO");
-        BTN_NuevoPaciente3.addActionListener(new java.awt.event.ActionListener() {
+        BTN_NuevoTurno.setText("NUEVO TURNO | BUSCAR TURNO");
+        BTN_NuevoTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_NuevoPaciente3ActionPerformed(evt);
+                BTN_NuevoTurnoActionPerformed(evt);
             }
         });
-        IF_Admin.getContentPane().add(BTN_NuevoPaciente3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 530, 280, 60));
+        IF_Admin.getContentPane().add(BTN_NuevoTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 280, 60));
 
-        BTN_GuardarActualizarPaciente3.setText("GUARDAR | ACTUALIZAR");
-        BTN_GuardarActualizarPaciente3.addActionListener(new java.awt.event.ActionListener() {
+        BTN_GuardarActualizarTurno.setText("GUARDAR | ACTUALIZAR");
+        BTN_GuardarActualizarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_GuardarActualizarPaciente3ActionPerformed(evt);
+                BTN_GuardarActualizarTurnoActionPerformed(evt);
             }
         });
-        IF_Admin.getContentPane().add(BTN_GuardarActualizarPaciente3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 530, 280, 60));
+        IF_Admin.getContentPane().add(BTN_GuardarActualizarTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 280, 60));
+
+        LB_Admin.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        IF_Admin.getContentPane().add(LB_Admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 500, 250, 30));
+        IF_Admin.getContentPane().add(JDC_FechaHoraColoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 240, 180, -1));
+
+        JC_NroSerieDosisAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VACUNAS" }));
+        IF_Admin.getContentPane().add(JC_NroSerieDosisAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 360, 180, 40));
+        IF_Admin.getContentPane().add(JT_NroSerieVacunas, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 300, 180, 30));
 
         jLabel38.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 255)));
-        IF_Admin.getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 810, 370));
+        IF_Admin.getContentPane().add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 810, 370));
 
         getContentPane().add(IF_Admin);
 
@@ -556,33 +583,31 @@ public class VacunarGUI extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(200, 100));
         IF_Consultas.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 240, 80));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JT_Consultas.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        JT_Consultas.setForeground(new java.awt.Color(0, 255, 0));
+        JT_Consultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(JT_Consultas);
 
         IF_Consultas.getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 760, 320));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel2.setText("STOCK VACUNAS");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        IF_Consultas.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 160, 60));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+        JC_Consultas.setForeground(new java.awt.Color(0, 255, 0));
+        JC_Consultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR", "PACIENTES", "LABORATORIOS", "VACUNAS", "TURNOS" }));
+        JC_Consultas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                JC_ConsultasItemStateChanged(evt);
             }
         });
-        IF_Consultas.getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 136, 260, 40));
+        IF_Consultas.getContentPane().add(JC_Consultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 260, 40));
 
         getContentPane().add(IF_Consultas);
 
@@ -592,12 +617,16 @@ public class VacunarGUI extends javax.swing.JFrame {
         IF_Ayuda.setVisible(true);
         IF_Ayuda.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 255)));
-        jTextPane1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextPane1.setPreferredSize(new java.awt.Dimension(870, 680));
-        jScrollPane2.setViewportView(jTextPane1);
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(1);
+        jTextArea1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(0, 255, 0));
+        jTextArea1.setRows(5);
+        jTextArea1.setText("                                                               SISTEMA PARA MANEJO INTEGRAL DE VACUNACION\n\n\n                                                                         Módulos que componen el sistema:\n\n                                                                                            INGRESO: \n     Modulo que permite el ingreso de los distintos operadores, dependiendo el nivel jerárquico, se podrá dar de alta,\n                                                    de baja o modificar a los usuarios que operan el sistema.\n\n                                                                                          CIUDADANO: \n    Posee toda la información necesaria para la adjudicación de citas de vacunación, en caso de que el/la Ciudadano/a \n             sea menor de edad o discapacitado, contiene la información del Tutor legal del menor o discapacitado.\n\n                                                                                        LABORATORIO:\n             Datos de los Laboratorios que proveen las distintas vacunas para las distintas campañas de vacunación.\n\n                                                                                              VACUNA: \n                               Información de las distintas vacunas que se aplican en las campañas de vacunación.\n\n                                                                                      CITA VACUNACION: \n     Guarda la información de cada cita de vacunación asignada a un ciudadano, que vacuna se debe aplicar, día y hora.\n\n                                                                                          CONSULTAS: \n                                          Información integral de Ciudadanos, Laboratorios y Vacunas.\n\n                                                                                              TEMAS: \n                                     Funcionalidad que permite operar el sistema en tonos claros u oscuros.\n\n                                   En caso de consultas comunicarse a : edusejumar@elmejorsoft.com\n                                                                                  Tel: (054) – 5555-7777\n\n                                                                                              TEAM39\n");
+        jTextArea1.setPreferredSize(new java.awt.Dimension(870, 680));
+        jScrollPane2.setViewportView(jTextArea1);
 
-        IF_Ayuda.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 660));
+        IF_Ayuda.getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 870, 630));
 
         getContentPane().add(IF_Ayuda);
 
@@ -674,9 +703,19 @@ public class VacunarGUI extends javax.swing.JFrame {
         JM_Temas.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
 
         MI_Noche.setText("Noche");
+        MI_Noche.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MI_NocheActionPerformed(evt);
+            }
+        });
         JM_Temas.add(MI_Noche);
 
         MI_Dia.setText("Día");
+        MI_Dia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MI_DiaActionPerformed(evt);
+            }
+        });
         JM_Temas.add(MI_Dia);
 
         MenuFlotante.add(JM_Temas);
@@ -727,7 +766,12 @@ public class VacunarGUI extends javax.swing.JFrame {
         campos.add(JT_DNI);
         campos.add(JT_Celular);
         campos.add(JT_Edad);
-                
+        
+        Color verde = new Color(0, 204, 0);
+        LB_EstadoPaciente.setVisible(true);
+        LB_EstadoPaciente.setText("Buscar Paciente por DNI.");
+        LB_EstadoPaciente.setForeground(verde);
+        
         activarBotonSiTextoIngresado(BTN_GuardarActualizarPaciente, campos);
         desbloquearCampos(false);
     }//GEN-LAST:event_MI_PacienteActionPerformed
@@ -744,6 +788,12 @@ public class VacunarGUI extends javax.swing.JFrame {
         campos.add(JT_DomComLab);
         campos.add(JT_EmailLab);
         campos.add(JT_TelefonoLab);
+        
+        Color verde = new Color(0, 204, 0);
+        JL_Lab.setVisible(true);
+        JL_Lab.setText("Buscar laboratorio por N° de Cuit.");
+        JL_Lab.setForeground(verde);
+        
         activarBotonSiTextoIngresado(BTN_GuardarActualizarLab, campos);
         desbloquearCamposEnIF(campos, false);
     }//GEN-LAST:event_MI_labActionPerformed
@@ -755,14 +805,19 @@ public class VacunarGUI extends javax.swing.JFrame {
         cargarLabsComboBox(JCB_CuitsLabs);
         BTN_GuardarActualizarVacuna.setEnabled(false);
         BTN_BuscarVacuna.setEnabled(false);
-        activarBotonSegunCantCaract(JT_SerieDosis, BTN_BuscarVacuna, 5);
+        activarBotonSegunCantCaract(JT_SerieDosis, BTN_BuscarVacuna, 5); //método que activa el botón cuando cumple con la cantidad de caracteres requeridos
         List <JTextField> campos = new ArrayList<>();
         campos.add(JT_CuitLabVacuna);
         campos.add(JT_NomVacuna);
         campos.add(JT_MarcaVacuna);
         campos.add(JT_Medida);
+        JCB_CuitsLabs.setEnabled(false);
         
-                
+        Color verde = new Color(0, 204, 0);
+        LB_EstadoVacuna.setVisible(true);
+        LB_EstadoVacuna.setText("Buscar vacuna por N° Serie Dosis.");
+        LB_EstadoVacuna.setForeground(verde);
+
         activarBotonSiTextoIngresado(BTN_GuardarActualizarVacuna, campos);
         desbloquearCamposVacuna(false);
     }//GEN-LAST:event_MI_VacActionPerformed
@@ -770,6 +825,26 @@ public class VacunarGUI extends javax.swing.JFrame {
     private void MI_TurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_TurnoActionPerformed
         ocultarIFrames();
         IF_Admin.setVisible(true);
+        BTN_BuscarTurno.setEnabled(true);
+        JC_NroSerieDosisAdmin.setEnabled(false);
+        Color verde = new Color(0, 204, 0);
+        LB_Admin.setVisible(true);
+        LB_Admin.setText("Buscar turno por DNI.");
+        LB_Admin.setForeground(verde);
+        
+        JDC_FechaHoraColoc.getDateEditor().setEnabled(false);
+        cargarVacunasComboBox(JC_NroSerieDosisAdmin);
+        BTN_GuardarActualizarTurno.setEnabled(false);
+        BTN_BuscarTurno.setEnabled(false);
+        activarBotonSegunCantCaract(JT_DniPacienteAdmin, BTN_BuscarTurno, 7);
+        List <JTextField> campos = new ArrayList<>();
+        campos.add(JT_CentroVacu);
+        campos.add(JT_DniPacienteAdmin);
+        campos.add(JT_Turno);
+        campos.add(JT_CodRefuerzo);       
+        
+        activarBotonSiTextoIngresado(BTN_GuardarActualizarTurno, campos);
+        desbloquearCamposAdmin(false);
     }//GEN-LAST:event_MI_TurnoActionPerformed
 
     private void MI_TurnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_TurnosActionPerformed
@@ -898,7 +973,7 @@ public class VacunarGUI extends javax.swing.JFrame {
         if (choice == JOptionPane.YES_OPTION) { //Opción que permite cargar un nuevo paciente
             Color verde = new Color(0, 204, 0);
             LB_EstadoPaciente.setVisible(true);
-            LB_EstadoPaciente.setText("Llenar todos los campos.");
+            LB_EstadoPaciente.setText("Llenar los campos obligatorios (*)");
             LB_EstadoPaciente.setForeground(verde);
             // Código para guardar
             BTN_BuscarPaciente.setVisible(false);
@@ -911,8 +986,14 @@ public class VacunarGUI extends javax.swing.JFrame {
             BTN_BuscarPaciente.setEnabled(true);
             desbloquearCampos(false);
             BTN_BuscarPaciente.setVisible(true);
+            
+            Color verde = new Color(0, 204, 0);
+            LB_EstadoPaciente.setVisible(true);
+            LB_EstadoPaciente.setText("Llenar campo DNI.");
+            LB_EstadoPaciente.setForeground(verde);
+
             //JOptionPane.showMessageDialog(null, "Seleccionaste Búsqueda Nueva");
-            limpiarCampos(IF_Paciente, LB_EstadoPaciente);
+            limpiarCampos(IF_Paciente, LB_EstadoVacuna);
         }
     }//GEN-LAST:event_BTN_NuevoPacienteActionPerformed
     
@@ -951,6 +1032,14 @@ public class VacunarGUI extends javax.swing.JFrame {
         JT_Medida.setEditable(seteo);
         JDC_VencimientoVacuna.setEnabled(seteo);
         RB_EstadoVacuna.setEnabled(seteo);
+    }
+    
+    private void desbloquearCamposAdmin(boolean seteo){        
+        JT_Turno.setEditable(seteo);
+        JT_CodRefuerzo.setEditable(seteo);
+        JT_CentroVacu.setEditable(seteo);
+        JT_NroSerieVacunas.setEditable(seteo);
+        JDC_FechaHoraColoc.setEnabled(seteo);
     }
     
     private void BTN_GuardarActualizarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_GuardarActualizarPacienteActionPerformed
@@ -1009,6 +1098,7 @@ public class VacunarGUI extends javax.swing.JFrame {
                     
                     ciuData.modificarCiudadano(pacienteEncontrado);
                     limpiarCampos(IF_Paciente, LB_EstadoPaciente);
+                    LB_EstadoPaciente.setText("Buscar Paciente por DNI.");
                     desbloquearCampos(false);
                 }
             } else {
@@ -1048,12 +1138,13 @@ public class VacunarGUI extends javax.swing.JFrame {
         campos.add(JT_PaisLab);
         campos.add(JT_DomComLab);
         campos.add(JT_EmailLab);
+        campos.add(JT_TelefonoLab);
                 
         boolean camposAlfasValidos = validarCamposAlfabeticos(campos);
         
         List <JTextField> camposNum = new ArrayList<>();
         camposNum.add(JT_CuitLab);
-        camposNum.add(JT_TelefonoLab);
+        
                 
         boolean camposNumericos = validarCamposNumericos(camposNum);
         
@@ -1111,12 +1202,24 @@ public class VacunarGUI extends javax.swing.JFrame {
         if (choice == JOptionPane.YES_OPTION) { //Opción que permite cargar un nuevo laboratorio
             // Código para guardar
             BTN_BuscarLab.setVisible(false);
-            desbloquearCamposLabs(true);            
+            desbloquearCamposLabs(true);
+            
+            Color verde = new Color(0, 204, 0);
+            JL_Lab.setVisible(true);
+            JL_Lab.setText("Llenar todos los campos.");
+            JL_Lab.setForeground(verde);
+
             limpiarCampos(IF_Laboratorio, LB_EstadoPaciente);
         } else if (choice == JOptionPane.NO_OPTION) { //Opción que permite iniciar una búsqueda nueva de paciente            
             BTN_BuscarLab.setEnabled(true);
             desbloquearCamposLabs(false);
-            BTN_BuscarLab.setVisible(true);          
+            BTN_BuscarLab.setVisible(true);
+            
+            Color verde = new Color(0, 204, 0);
+            JL_Lab.setVisible(true);
+            JL_Lab.setText("Llenar campo de Cuit Laboratorio.");
+            JL_Lab.setForeground(verde);
+
             limpiarCampos(IF_Laboratorio, LB_EstadoPaciente);
         }
     }//GEN-LAST:event_BTN_NuevoLabActionPerformed
@@ -1188,14 +1291,25 @@ public class VacunarGUI extends javax.swing.JFrame {
             // Código para guardar una vacuna
             BTN_BuscarVacuna.setVisible(false);
             RB_EstadoVacuna.setVisible(false);
+            JCB_CuitsLabs.setEnabled(true);
+            Color verde = new Color(0, 204, 0);
+            LB_EstadoVacuna.setVisible(true);
+            LB_EstadoVacuna.setText("Llenar todos los campos.");
+            LB_EstadoVacuna.setForeground(verde);
             
             desbloquearCamposVacuna(true);
-            limpiarCampos(IF_Vacuna, LB_EstadoVacuna);
+            limpiarCampos(IF_Vacuna, LB_EstadoPaciente);
         } else if (choice == JOptionPane.NO_OPTION) { //Opción que permite iniciar una búsqueda nueva de vacuna            
             BTN_BuscarVacuna.setEnabled(true);
             desbloquearCamposVacuna(false);
+            JCB_CuitsLabs.setEnabled(false);
+            Color verde = new Color(0, 204, 0);
+            LB_EstadoVacuna.setVisible(true);
+            LB_EstadoVacuna.setText("Llenar campo N° Serie Dosis.");
+            LB_EstadoVacuna.setForeground(verde);
+            
             BTN_BuscarVacuna.setVisible(true);
-            limpiarCampos(IF_Vacuna, LB_EstadoVacuna);
+            limpiarCampos(IF_Vacuna, LB_EstadoPaciente);
         }
     }//GEN-LAST:event_BTN_NuevaVacunaActionPerformed
 
@@ -1227,7 +1341,7 @@ public class VacunarGUI extends javax.swing.JFrame {
         List <JTextField> camposNum = new ArrayList<>();
         camposNum.add(JT_SerieDosis);
         camposNum.add(JT_CuitLabVacuna);
-        camposNum.add(JT_Edad);
+        
         
         boolean camposNumericos = validarCamposNumericos(camposNum);
         
@@ -1315,11 +1429,11 @@ public class VacunarGUI extends javax.swing.JFrame {
                 RB_EstadoVacuna.setSelected(estado); // Establecemos el estado del RadioButton           
                 if (RB_EstadoVacuna.isSelected()) {
                     Color verde = new Color(0, 204, 0);
-                    LB_EstadoVacuna.setText("Vacuna activa");
+                    LB_EstadoVacuna.setText("Vacuna activa en Stock");
                     LB_EstadoVacuna.setForeground(verde);
                 } else {
                     Color rojo = new Color(210, 32, 32);
-                    LB_EstadoVacuna.setText("Vacuna inactiva");
+                    LB_EstadoVacuna.setText("Vacuna no existe en Stock");
                     LB_EstadoVacuna.setForeground(rojo);
                 }
             } catch (NullPointerException e) {
@@ -1334,22 +1448,343 @@ public class VacunarGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BTN_BuscarVacunaActionPerformed
 
-    private void BTN_BuscarPaciente3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarPaciente3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTN_BuscarPaciente3ActionPerformed
+    private void BTN_BuscarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarTurnoActionPerformed
+        desbloquearCamposAdmin(true);
+        CitaVacunacionData citaData = new CitaVacunacionData();
 
-    private void BTN_NuevoPaciente3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NuevoPaciente3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTN_NuevoPaciente3ActionPerformed
+        String dniPaciente = JT_DniPacienteAdmin.getText();
+        String nroSerie = JC_NroSerieDosisAdmin.getSelectedItem().toString();
 
-    private void BTN_GuardarActualizarPaciente3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_GuardarActualizarPaciente3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BTN_GuardarActualizarPaciente3ActionPerformed
+        boolean dniValido = esNumeroDNI(dniPaciente);
+        //boolean nroSerieValido = esNumeroDosisValido(nroSerie);
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        if (dniValido) {
+            try {
+                BTN_BuscarTurno.setEnabled(false);
+                int dniCiudadano = Integer.parseInt(dniPaciente);
+                //int nroSerieDosis = Integer.parseInt(nroSerie);
 
+                // Buscar el turno por DNI y número de serie
+                CitaVacunacion turnoBuscado = citaData.buscarTurnoPorDniCiudadano(dniCiudadano);
+
+                if (turnoBuscado != null) {
+                    LB_Admin.setText("");
+                    // Mostrar los datos del turno encontrado
+                    JT_Turno.setText(Integer.toString(turnoBuscado.getCodCita()));
+                    JT_CodRefuerzo.setText(Integer.toString(turnoBuscado.getCodRefuerzo()));
+                    JT_CentroVacu.setText(turnoBuscado.getCentroVacunacion());
+                    LocalDate fechaHoraColoc = turnoBuscado.getFechaHoraColoca();
+                    //línea de código para transformar el dato LocalDate para cargarlo en el JCalendar
+                    java.util.Date utilDate = java.util.Date.from(fechaHoraColoc.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                    
+                    JDC_FechaHoraColoc.setDate(utilDate);
+                                       
+                    Vacuna vacunaAsociada = turnoBuscado.getNroSerieDosis();
+                    JT_DniPacienteAdmin.setEditable(false);
+                    
+                    // Ahora, hay que encontrar esta vacuna en el JComboBox y seleccionarla
+                    // Suponiendo que cada elemento en el JComboBox se representa como la cadena armada "nroSerie - nombreVacuna"
+                    //String nombreVacunaBuscada = vacunaAsociada.getNroSerieDosis() + " - " + vacunaAsociada.getNombreVacuna();
+                    
+                    JT_NroSerieVacunas.setText(vacunaAsociada.getNroSerieDosis() + "");
+                    JC_NroSerieDosisAdmin.setEnabled(true);                  
+                } else {
+                    JOptionPane.showMessageDialog(null, "El turno no existe en las listas.\nIntenta con otro DNI.");
+                    JT_DniPacienteAdmin.setText("");
+                    BTN_BuscarTurno.setVisible(true);
+                    desbloquearCamposAdmin(false);
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Error al convertir DNI.");
+                desbloquearCamposAdmin(false);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "DNI no válido.");
+            desbloquearCamposAdmin(false);
+        }
+    }//GEN-LAST:event_BTN_BuscarTurnoActionPerformed
+            
+    private void BTN_NuevoTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_NuevoTurnoActionPerformed
+        
+        Object[] options = {"Agregar Turno", "Buscar Turno"};
+        int choice = JOptionPane.showOptionDialog(null,
+                "¿Qué quieres hacer?",
+                "Elegir una opción",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+        if (choice == JOptionPane.YES_OPTION) { //Opción que permite cargar un nuevo paciente
+            Color verde = new Color(0, 204, 0);
+            LB_Admin.setVisible(true);
+            LB_Admin.setText("Llenar todos los campos.");
+            LB_Admin.setForeground(verde);
+            // Código para guardar
+            BTN_BuscarTurno.setVisible(false);
+            JC_NroSerieDosisAdmin.setEnabled(true);
+            desbloquearCamposAdmin(true);
+            limpiarCampos(IF_Admin, LB_EstadoPaciente);
+            
+        } else if (choice == JOptionPane.NO_OPTION) { //Opción que permite iniciar una búsqueda nueva de paciente            
+            BTN_BuscarTurno.setEnabled(true);
+            Color verde = new Color(0, 204, 0);
+            LB_Admin.setVisible(true);
+            LB_Admin.setText("Llenar el campo DNI.");
+            LB_Admin.setForeground(verde);
+            desbloquearCamposAdmin(false);
+            BTN_BuscarTurno.setVisible(true);
+            JT_DniPacienteAdmin.setEditable(true);
+            //JOptionPane.showMessageDialog(null, "Seleccionaste Búsqueda Nueva");
+            limpiarCampos(IF_Admin, LB_EstadoPaciente);
+        }
+    }//GEN-LAST:event_BTN_NuevoTurnoActionPerformed
+
+    private void BTN_GuardarActualizarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_GuardarActualizarTurnoActionPerformed
+        CitaVacunacionData citaData = new CitaVacunacionData();
+        VacunaData vacuData = new VacunaData(); 
+        
+        String numDniPaciente = JT_DniPacienteAdmin.getText();
+        String numTurno = JT_Turno.getText();
+        String codRefuerzo = JT_CodRefuerzo.getText();
+        String centroVacu = JT_CentroVacu.getText();
+        String nroSerieVacuna = JT_NroSerieVacunas.getText();
+
+        // Convierte la fecha del JCalendar a LocalDate
+        LocalDate fechaHoraColocacion = JDC_FechaHoraColoc.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+        boolean dniValido = esNumeroDNI(numDniPaciente);
+        boolean turnoValido = esNumeroTurnoValido(numTurno);
+        boolean serieValida = esNumeroDosisValido(nroSerieVacuna);
+
+        List <JTextField> camposAlfa = new ArrayList<>();
+        camposAlfa.add(JT_CentroVacu);
+
+        // Agregar validación de campos alfabéticos
+        boolean camposAlfasValidos = validarCamposAlfabeticos(camposAlfa);
+
+        List <JTextField> camposNum = new ArrayList<>();
+        camposNum.add(JT_DniPacienteAdmin);
+        camposNum.add(JT_Turno);
+        camposNum.add(JT_CodRefuerzo);
+        camposNum.add(JT_NroSerieVacunas);
+
+        // Agregar validación de campos numéricos
+        boolean camposNumericos = validarCamposNumericos(camposNum) && serieValida;
+
+        if (dniValido && turnoValido && camposAlfasValidos && camposNumericos) {
+            try {
+                int dniCiudadano = Integer.parseInt(numDniPaciente);
+                int nroTurno = Integer.parseInt(numTurno);
+                int codRefuerzoInt = Integer.parseInt(codRefuerzo);
+                int nroSerieVacu = Integer.parseInt(nroSerieVacuna);
+                // Buscar el turno por DNI y número de turno
+                CitaVacunacion turnoEncontrado = citaData.buscarTurnoPorDniCiudadano(dniCiudadano);
+                
+                if (turnoEncontrado != null) {
+                    int opcion = JOptionPane.showConfirmDialog(null, "El turno ya existe. ¿Deseas actualizarlo?", "Confirmación", JOptionPane.YES_NO_OPTION);
+                    if (opcion == JOptionPane.YES_OPTION) {
+                        // Actualizar el turno existente
+                        turnoEncontrado.setCodRefuerzo(codRefuerzoInt);
+                        turnoEncontrado.setCentroVacunacion(centroVacu);
+                        turnoEncontrado.setFechaHoraColoca(fechaHoraColocacion);
+
+                        // Obtener una instancia de Vacuna desde VacunaData por su número de serie
+                        Vacuna vacunaSeleccionada = vacuData.obtenerVacuna(nroSerieVacu);
+                        turnoEncontrado.setNroSerieDosis(vacunaSeleccionada); // Asignar la instancia de Vacuna
+
+                        citaData.modificarCitasVacunacion(turnoEncontrado);
+
+                        // Restablecer campos y bloquear la edición
+                        limpiarCampos(IF_Admin, LB_Admin);
+                        desbloquearCamposAdmin(false);
+                    }
+                } else {
+                    // Si el turno no existe, guardar uno nuevo
+                    CiudadanoData ciuData = new CiudadanoData();
+                    Ciudadano ciudadanoBuscado = ciuData.buscarCiudadanoPorDni(dniCiudadano);
+
+                    // Obtener una instancia de Vacuna desde VacunaData por su número de serie
+                    Vacuna vacunaBuscada = vacuData.obtenerVacuna(nroSerieVacu);
+
+                    CitaVacunacion nuevoTurno = new CitaVacunacion(nroTurno, ciudadanoBuscado, codRefuerzoInt, centroVacu, fechaHoraColocacion, vacunaBuscada);
+                    citaData.guardarCitaVacunacion(nuevoTurno);
+                    JOptionPane.showMessageDialog(null, "Se ha guardado un nuevo turno.");
+                    limpiarCampos(IF_Admin, LB_Admin);
+                    desbloquearCamposAdmin(false);
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Error al convertir DNI o número de turno.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Verifica los campos y que sean correctos.");
+        }
+
+    }//GEN-LAST:event_BTN_GuardarActualizarTurnoActionPerformed
+       
+    private void JC_ConsultasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JC_ConsultasItemStateChanged
+        CiudadanoData ciuData = new CiudadanoData();
+        VacunaData vacuData = new VacunaData();
+        LaboratorioData labData = new LaboratorioData();
+        CitaVacunacionData citaData = new CitaVacunacionData();
+        
+        List <Ciudadano> listaCiudadanos = ciuData.listarCiudadanos();
+        List <Vacuna> listaVacunas = vacuData.listarVacunas();
+        List <Laboratorio> listaLaboratorios = labData.listarLaboratorios();
+        List <CitaVacunacion> listaTurnos = citaData.listarCitasVacunacion();
+        DefaultTableModel modeloTabla = (DefaultTableModel) JT_Consultas.getModel();
+        
+        modeloTabla.setColumnCount(0);
+        
+        switch (JC_Consultas.getSelectedIndex()) {
+            case 1:
+                armarCabeceraPaciente(modeloTabla, JT_Consultas);
+                // Limpia la tabla (borra todas las filas existentes)
+                modeloTabla.setRowCount(0);
+                listaCiudadanos.forEach((paciente) -> {
+                    // Agrega una fila con los datos del paciente en el mismo orden que las columnas
+                    modeloTabla.addRow(new Object[]{paciente.getDni(), paciente.getApellido(), paciente.getNombre(), paciente.getCelular()});
+                    centrarCeldas(JT_Consultas);
+                    
+                    // Actualiza la tabla para que se muestren los nuevos datos
+                    modeloTabla.fireTableDataChanged();
+                }); break;
+            case 2:
+                armarCabeceraLabs(modeloTabla, JT_Consultas);
+                // Limpia la tabla (borra todas las filas existentes)
+                modeloTabla.setRowCount(0);
+                listaLaboratorios.forEach((lab) -> {
+                    // Agrega una fila con los datos del laboratorio en el mismo orden que las columnas
+                    modeloTabla.addRow(new Object[]{lab.getCuitLaboratorio(), lab.getNombreLab(), lab.getMail(), lab.getTelefono()});
+                    centrarCeldas(JT_Consultas);
+                    
+                    // Actualiza la tabla para que se muestren los nuevos datos
+                    modeloTabla.fireTableDataChanged();
+                }); break;
+            case 3:
+                armarCabeceraVacs(modeloTabla, JT_Consultas);
+                // Limpia la tabla (borra todas las filas existentes)
+                modeloTabla.setRowCount(0);
+                listaVacunas.forEach((vacuna) -> {
+                    // Agrega una fila con los datos del paciente en el mismo orden que las columnas
+                    modeloTabla.addRow(new Object[]{vacuna.getNroSerieDosis(), vacuna.getNombreVacuna(), vacuna.getCuitLaboratorio(), vacuna.getVencimiento()});
+                    centrarCeldas(JT_Consultas);
+                    
+                    // Actualiza la tabla para que se muestren los nuevos datos
+                    modeloTabla.fireTableDataChanged();
+                }); break;
+            case 4:
+                armarCabeceraTurnos(modeloTabla, JT_Consultas);
+                // Limpia la tabla (borra todas las filas existentes)
+                modeloTabla.setRowCount(0);
+                listaTurnos.forEach((turno) -> {
+                    // Agrega una fila con los datos del paciente en el mismo orden que las columnas
+                    modeloTabla.addRow(new Object[]{(turno.getCiudadano().getDni() + " - "  + turno.getCiudadano().getApellido()), turno.getCodCita(),
+                        turno.getNroSerieDosis().getNroSerieDosis(), turno.getCentroVacunacion()});
+                    centrarCeldas(JT_Consultas);
+                    
+                    // Actualiza la tabla para que se muestren los nuevos datos
+                    modeloTabla.fireTableDataChanged();
+                }); break;
+            default:
+                break;
+        }
+    }//GEN-LAST:event_JC_ConsultasItemStateChanged
+    
+    //Método que hago para probar algo específico
+    private void JCB_CuitsLabsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCB_CuitsLabsItemStateChanged
+        
+        Object selected = JCB_CuitsLabs.getSelectedItem();
+    
+        if (selected instanceof String) {
+            String selectedItem = (String) selected;
+
+            if ("LABORATORIOS INFO".equals(selectedItem)) {
+                // No hacer nada si se selecciona "LABORATORIOS INFO"
+            } else {
+                // Realiza la conversión y actualización del JTextField
+                String[] parts = selectedItem.split(" - ");
+                if (parts.length == 2) {
+                    int cuitLab = Integer.parseInt(parts[0]);
+                    JT_CuitLabVacuna.setText(String.valueOf(cuitLab));
+                }
+            }
+        }
+    }//GEN-LAST:event_JCB_CuitsLabsItemStateChanged
+
+    private void MI_DiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_DiaActionPerformed
+        
+        try {
+            UIManager.setLookAndFeel(new FlatSolarizedLightIJTheme()); // Cambiar al tema diurno
+            SwingUtilities.updateComponentTreeUI(VacunarGUI.this);
+        } catch (UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_MI_DiaActionPerformed
+
+    private void MI_NocheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_NocheActionPerformed
+     
+        try {
+            UIManager.setLookAndFeel(new FlatCarbonIJTheme()); // Cambiar al tema diurno
+            SwingUtilities.updateComponentTreeUI(VacunarGUI.this);
+        } catch (UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_MI_NocheActionPerformed
+        
+    private void armarCabeceraPaciente(DefaultTableModel tabla, JTable jT_tablin){
+
+        tabla.addColumn("DNI");
+        tabla.addColumn("APELLIDO");
+        tabla.addColumn("NOMBRE");
+        tabla.addColumn("CELULAR");
+
+        jT_tablin.setModel(tabla);
+    }
+    
+    private void armarCabeceraLabs(DefaultTableModel tabla, JTable jT_tablin){
+
+        tabla.addColumn("CUIT");
+        tabla.addColumn("NOMBRE");
+        tabla.addColumn("MAIL");
+        tabla.addColumn("TELEFONO");
+
+        jT_tablin.setModel(tabla);
+    }
+    
+    private void armarCabeceraVacs(DefaultTableModel tabla, JTable jT_tablin){
+
+        tabla.addColumn("NUM SERIE");
+        tabla.addColumn("NOMBRE");
+        tabla.addColumn("CUIT LAB");
+        tabla.addColumn("VENCIMIENTO");
+
+        jT_tablin.setModel(tabla);
+    }
+    
+    private void armarCabeceraTurnos(DefaultTableModel tabla, JTable jT_tablin){
+
+        tabla.addColumn("DNI PACIENTE");
+        tabla.addColumn("NUM TURNO");
+        tabla.addColumn("NUM SERIE");
+        tabla.addColumn("LUGAR");
+
+        jT_tablin.setModel(tabla);
+    }
+    
+    private void centrarCeldas(JTable tabla){
+        // Configurar el centrado de las celdas en la tabla
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        
+        // Aplicar el centrado a todas las columnas de la tabla
+        for (int i = 0; i < tabla.getColumnCount(); i++) {
+            tabla.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }        
+    }
+    
     private void limpiarCampos(JInternalFrame internalFrame, JLabel labelALimpiar) {
         if (internalFrame != null) {
             Component[] components = internalFrame.getContentPane().getComponents();
@@ -1394,6 +1829,34 @@ public class VacunarGUI extends javax.swing.JFrame {
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Campo DNI debe ser un número válido.");
+            return false; // No se pudo convertir a entero.
+        }
+    }
+    
+    public static boolean esNumeroTurnoValido(String str) {
+
+        if (str == null || str.isEmpty()) { // Evalúa que no sea un campo vacío
+            JOptionPane.showMessageDialog(null, "Campo Turno debe llenarse.");
+            return false;
+        }
+
+        for (char c : str.toCharArray()) { // Evalúa que no contenga carácteres, uso un for each para eso
+            if (!Character.isDigit(c)) {
+                JOptionPane.showMessageDialog(null, "Campo Turno debe contener solo números.");
+                return false; // No es un número válido.
+            }
+        }
+
+        try {
+            int turno = Integer.parseInt(str); // Intenta convertir a entero.
+            if (turno > 0 && turno < 999999999) {
+                return true; // Es un número válido y está dentro del rango.
+            } else {
+                JOptionPane.showMessageDialog(null, "El campo Turno debe cumplir con un formato válido.");
+                return false; // No está dentro del rango.
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Campo Turno debe ser un número válido.");
             return false; // No se pudo convertir a entero.
         }
     }
@@ -1480,7 +1943,7 @@ public class VacunarGUI extends javax.swing.JFrame {
         for (JTextField campo : campos) {
             String textoCampo = campo.getText().trim(); // Elimina espacios en blanco al principio y al final.
 
-            if (!textoCampo.matches("^[a-zA-Z@-ZáéíóúÁÉÍÓÚüÜñÑ'-'.\\s]+$")) {
+            if (!textoCampo.matches("^[a-zA-Z@-ZáéíóúÁÉÍÓÚüÜñÑ1234567890'+'-'.\\s]+$")) {
                 JOptionPane.showMessageDialog(null, "El campo " + campo.getName() + " debe contener solo letras, el símbolo '@' o espacios.");
                 return false;
             }
@@ -1501,14 +1964,7 @@ public class VacunarGUI extends javax.swing.JFrame {
 
         return true; // Todos los campos son válidos.
     }
-    
-    /*
-    public String getCustomDisplayText() {
-        return getCuitLaboratorio() + " - " + getNombreLab();
-    }
-
-    */
-    
+        
     private void cargarLabsComboBox(JComboBox combo) {
         LaboratorioData labData = new LaboratorioData();
 
@@ -1517,9 +1973,31 @@ public class VacunarGUI extends javax.swing.JFrame {
 
         combo.removeAllItems();
 
+        // Agregar un elemento no seleccionable como opción inicial
+        combo.addItem("LABORATORIOS INFO");
+
         // Agregar los elementos al JComboBox
         for (Laboratorio lab : listaLabs) {
             combo.addItem(lab.getCuitLaboratorio() + " - " + lab.getNombreLab());
+        }
+
+    }
+
+    
+    private void cargarVacunasComboBox(JComboBox combo) {
+        VacunaData vacuData = new VacunaData();
+
+        // Obtener la lista de vacunas
+        List<Vacuna> listaVacunas = vacuData.listarVacunas();
+
+        combo.removeAllItems();
+
+        // Agregar un elemento no seleccionable como opción inicial
+        combo.addItem("VACUNAS INFO");
+
+        // Agregar los elementos reales al JComboBox
+        for (Vacuna vac : listaVacunas) {
+            combo.addItem(vac.getNroSerieDosis() + " - " + vac.getNombreVacuna());
         }
     }
 
@@ -1542,16 +2020,16 @@ public class VacunarGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_BuscarLab;
     private javax.swing.JButton BTN_BuscarPaciente;
-    private javax.swing.JButton BTN_BuscarPaciente3;
+    private javax.swing.JButton BTN_BuscarTurno;
     private javax.swing.JButton BTN_BuscarVacuna;
     private javax.swing.JButton BTN_GuardarActualizarLab;
     private javax.swing.JButton BTN_GuardarActualizarPaciente;
-    private javax.swing.JButton BTN_GuardarActualizarPaciente3;
+    private javax.swing.JButton BTN_GuardarActualizarTurno;
     private javax.swing.JButton BTN_GuardarActualizarVacuna;
     private javax.swing.JButton BTN_NuevaVacuna;
     private javax.swing.JButton BTN_NuevoLab;
     private javax.swing.JButton BTN_NuevoPaciente;
-    private javax.swing.JButton BTN_NuevoPaciente3;
+    private javax.swing.JButton BTN_NuevoTurno;
     private javax.swing.JInternalFrame IF_Admin;
     private javax.swing.JInternalFrame IF_Ayuda;
     private javax.swing.JInternalFrame IF_Consultas;
@@ -1559,7 +2037,11 @@ public class VacunarGUI extends javax.swing.JFrame {
     private javax.swing.JInternalFrame IF_Paciente;
     private javax.swing.JInternalFrame IF_Vacuna;
     private javax.swing.JComboBox<String> JCB_CuitsLabs;
+    private javax.swing.JComboBox<String> JC_Consultas;
+    private javax.swing.JComboBox<String> JC_NroSerieDosisAdmin;
+    private com.toedter.calendar.JDateChooser JDC_FechaHoraColoc;
     private com.toedter.calendar.JDateChooser JDC_VencimientoVacuna;
+    private javax.swing.JLabel JL_Lab;
     private javax.swing.JMenu JM_Admin;
     private javax.swing.JMenu JM_Ayuda;
     private javax.swing.JMenu JM_Consultas;
@@ -1569,16 +2051,16 @@ public class VacunarGUI extends javax.swing.JFrame {
     private javax.swing.JMenu JM_Temas;
     private javax.swing.JMenu JM_Vacuna;
     private javax.swing.JTextField JT_Apellido;
-    private javax.swing.JTextField JT_Apellido3;
     private javax.swing.JTextField JT_Celular;
-    private javax.swing.JTextField JT_Celular5;
-    private javax.swing.JTextField JT_Celular6;
+    private javax.swing.JTextField JT_CentroVacu;
+    private javax.swing.JTextField JT_CodRefuerzo;
+    private javax.swing.JTable JT_Consultas;
     private javax.swing.JTextField JT_CuitLab;
     private javax.swing.JTextField JT_CuitLabVacuna;
     private javax.swing.JTextField JT_DNI;
+    private javax.swing.JTextField JT_DniPacienteAdmin;
     private javax.swing.JTextField JT_DomComLab;
     private javax.swing.JTextField JT_Edad;
-    private javax.swing.JTextField JT_Edad3;
     private javax.swing.JTextField JT_Email;
     private javax.swing.JTextField JT_EmailLab;
     private javax.swing.JTextField JT_MarcaVacuna;
@@ -1586,16 +2068,16 @@ public class VacunarGUI extends javax.swing.JFrame {
     private javax.swing.JTextField JT_NomVacuna;
     private javax.swing.JTextField JT_Nombre;
     private javax.swing.JTextField JT_NombreLab;
+    private javax.swing.JTextField JT_NroSerieVacunas;
     private javax.swing.JTextField JT_Ocupacion;
     private javax.swing.JTextField JT_PaisLab;
     private javax.swing.JTextField JT_Patologia;
     private javax.swing.JTextField JT_ResponsableLegal;
-    private javax.swing.JTextField JT_ResponsableLegal5;
-    private javax.swing.JTextField JT_ResponsableLegal6;
     private javax.swing.JTextField JT_SerieDosis;
     private javax.swing.JTextField JT_TelefonoLab;
+    private javax.swing.JTextField JT_Turno;
+    private javax.swing.JLabel LB_Admin;
     private javax.swing.JLabel LB_EstadoPaciente;
-    private javax.swing.JLabel LB_EstadoPaciente2;
     private javax.swing.JLabel LB_EstadoVacuna;
     private javax.swing.JMenuItem MI_Ayuda;
     private javax.swing.JMenuItem MI_Dia;
@@ -1609,7 +2091,6 @@ public class VacunarGUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar MenuFlotante;
     private javax.swing.JRadioButton RB_EstadoPaciente;
     private javax.swing.JRadioButton RB_EstadoVacuna;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1621,7 +2102,6 @@ public class VacunarGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -1644,6 +2124,7 @@ public class VacunarGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1651,8 +2132,7 @@ public class VacunarGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
     private boolean activarBotonSiTextoIngresado(JButton button, List<JTextField> textFields) {

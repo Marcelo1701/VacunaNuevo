@@ -23,7 +23,7 @@ public class VacunAR23 {
     public static void main(String[] args) {
         Conexion conex = new Conexion();
         
-        Ciudadano citizen = new Ciudadano(42055288, "Andrea", "Gorostiaga", "agoros@gamil.com", "150230630", "Cardiopatía congenita", "Sanidad", 22, true);
+        Ciudadano citizen = new Ciudadano(30475221, "Juliana", "Hernandez", "julianaher@gmail.com", "1569326510", "", "Deportista", 38, true);
         CiudadanoData ciuData = new CiudadanoData();
         
         Laboratorio lab = new Laboratorio(284441288, "Dental Medrano", "Argentina", "Paraguay 436", "dmedrano@medrano.com", "+56395214");
@@ -40,10 +40,10 @@ public class VacunAR23 {
         //conex.Conexion_Maria();
         
         //ciuData.guardarCiudadano(citizen);
-        //ciuData.buscarCiudadanoPorDni(42055288);
+        //ciuData.buscarCiudadanoPorDni(30475221);
         //ciuData.listarCiudadanos();
         //ciuData.modificarCiudadano(citizen);
-        //ciuData.eliminarCiudadano(42055288, false);
+        //ciuData.eliminarCiudadano(30475221, false);
         
         //labData.guardarLaboratorio(lab);
         //labData.listarLaboratorios();
