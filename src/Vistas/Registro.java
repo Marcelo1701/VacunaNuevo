@@ -116,6 +116,7 @@ public class Registro extends javax.swing.JFrame {
         });
 
         jB_GenerarUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jB_GenerarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/usuario.png"))); // NOI18N
         jB_GenerarUsuario.setText("Generar Usuario");
         jB_GenerarUsuario.setMaximumSize(new java.awt.Dimension(164, 33));
         jB_GenerarUsuario.setMinimumSize(new java.awt.Dimension(164, 33));
@@ -132,8 +133,11 @@ public class Registro extends javax.swing.JFrame {
         });
 
         jB_IngresarSistema.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jB_IngresarSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ordenador-portatil (1).png"))); // NOI18N
         jB_IngresarSistema.setText("Ingresar al Sistema");
-        jB_IngresarSistema.setPreferredSize(new java.awt.Dimension(165, 33));
+        jB_IngresarSistema.setMaximumSize(new java.awt.Dimension(194, 42));
+        jB_IngresarSistema.setMinimumSize(new java.awt.Dimension(194, 42));
+        jB_IngresarSistema.setPreferredSize(new java.awt.Dimension(194, 42));
         jB_IngresarSistema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_IngresarSistemaActionPerformed(evt);
@@ -141,10 +145,11 @@ public class Registro extends javax.swing.JFrame {
         });
 
         jB_SalirSistemaRegistro.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jB_SalirSistemaRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salida (1).png"))); // NOI18N
         jB_SalirSistemaRegistro.setText("Salir del Sistema");
-        jB_SalirSistemaRegistro.setMaximumSize(new java.awt.Dimension(164, 33));
-        jB_SalirSistemaRegistro.setMinimumSize(new java.awt.Dimension(164, 33));
-        jB_SalirSistemaRegistro.setPreferredSize(new java.awt.Dimension(165, 33));
+        jB_SalirSistemaRegistro.setMaximumSize(new java.awt.Dimension(205, 42));
+        jB_SalirSistemaRegistro.setMinimumSize(new java.awt.Dimension(205, 42));
+        jB_SalirSistemaRegistro.setPreferredSize(new java.awt.Dimension(205, 42));
         jB_SalirSistemaRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_SalirSistemaRegistroActionPerformed(evt);
@@ -155,6 +160,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel8.setText("(Clave de 4 a 8 caracteres)");
 
         jB_BuscarUsuarioCorreo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jB_BuscarUsuarioCorreo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/correo-de-busqueda.png"))); // NOI18N
         jB_BuscarUsuarioCorreo.setText("Buscar por Correo");
         jB_BuscarUsuarioCorreo.setPreferredSize(new java.awt.Dimension(165, 33));
         jB_BuscarUsuarioCorreo.addActionListener(new java.awt.event.ActionListener() {
@@ -164,6 +170,7 @@ public class Registro extends javax.swing.JFrame {
         });
 
         jB_ActualizarUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jB_ActualizarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar-datos.png"))); // NOI18N
         jB_ActualizarUsuario.setText("Actualizar Usuario");
         jB_ActualizarUsuario.setPreferredSize(new java.awt.Dimension(165, 33));
         jB_ActualizarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -173,6 +180,7 @@ public class Registro extends javax.swing.JFrame {
         });
 
         jB_limpiarCampos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jB_limpiarCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/limpieza-de-datos.png"))); // NOI18N
         jB_limpiarCampos.setText("Limpiar Campos");
         jB_limpiarCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,11 +204,11 @@ public class Registro extends javax.swing.JFrame {
                                 .addGap(52, 52, 52)
                                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jB_ActualizarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jB_IngresarSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jB_IngresarSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(67, 67, 67)
                                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jB_GenerarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jB_SalirSistemaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jB_SalirSistemaRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(17, 17, 17))
                             .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(jInternalFrame1Layout.createSequentialGroup()
@@ -399,8 +407,9 @@ public class Registro extends javax.swing.JFrame {
         Pattern pat = null;
         Matcher mat = null;
         
-        pat = Pattern.compile("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
-    //pat = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$");
+        pat = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)?(\\w+\\.[a-zA-Z]{3,})$");    
+     //   pat = Pattern.compile("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+    
     mat = pat.matcher(correo);
        if (mat.find()){
        return true;
