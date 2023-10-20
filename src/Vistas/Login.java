@@ -15,6 +15,8 @@ import java.awt.Component;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 
@@ -55,6 +57,7 @@ public class Login extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jP_Contraseña = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,16 +81,24 @@ public class Login extends javax.swing.JFrame {
         IF_Login.getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, -1, -1));
 
         jB_Acceder.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jB_Acceder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/desbloquear.png"))); // NOI18N
         jB_Acceder.setText("Acceder");
+        jB_Acceder.setMaximumSize(new java.awt.Dimension(140, 42));
+        jB_Acceder.setMinimumSize(new java.awt.Dimension(140, 42));
+        jB_Acceder.setPreferredSize(new java.awt.Dimension(140, 42));
         jB_Acceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_AccederActionPerformed(evt);
             }
         });
-        IF_Login.getContentPane().add(jB_Acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, -1, -1));
+        IF_Login.getContentPane().add(jB_Acceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 400, 140, -1));
 
         jB_salirAplicacionLoguin.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jB_salirAplicacionLoguin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salida (1).png"))); // NOI18N
         jB_salirAplicacionLoguin.setText("Salir");
+        jB_salirAplicacionLoguin.setMaximumSize(new java.awt.Dimension(140, 42));
+        jB_salirAplicacionLoguin.setMinimumSize(new java.awt.Dimension(140, 42));
+        jB_salirAplicacionLoguin.setPreferredSize(new java.awt.Dimension(140, 42));
         jB_salirAplicacionLoguin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_salirAplicacionLoguinActionPerformed(evt);
@@ -102,6 +113,9 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/contrasena (1).png"))); // NOI18N
         IF_Login.getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 130, 130));
+
+        jLabel1.setText("(Correo)");
+        IF_Login.getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,9 +155,23 @@ public class Login extends javax.swing.JFrame {
         String clave = jP_Contraseña.getText();
 
         
-        if (!usuario.equals("") && !clave.equals("")) {
+        if (usuario.equals("") || clave.equals("")) {
+       
+            jT_Usuario.setText("");
+            jP_Contraseña.setText("");
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+            
+            
+        } else if (!validarCorreo(usuario.trim())){
+            
+            JOptionPane.showMessageDialog(null, "Se debe ingresar un Correo correcto");
+            
+        }else { 
+            
+            String sql = "SELECT perfil FROM usuario WHERE mail= '" + usuario + "' AND clave= '" + clave + "'";
+            
             try {
-                String sql = "SELECT perfil FROM usuario WHERE mail= '" + usuario + "' AND clave= '" + clave + "'";
+                
                 PreparedStatement ps = null;
 
                 ps = conex.Conexion_Maria().prepareStatement(sql);
@@ -207,15 +235,27 @@ public class Login extends javax.swing.JFrame {
 
             }
 
-        } else {
-            jT_Usuario.setText("");
-            jP_Contraseña.setText("");
-            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
-        }
-    
+        } 
     
     }//GEN-LAST:event_jB_AccederActionPerformed
 
+    public boolean validarCorreo(String correo) {
+   
+        Pattern pat = null;
+        Matcher mat = null;
+        
+        pat = Pattern.compile("^[A-Za-z0-9+_.-]+@(.+)?(\\w+\\.[a-zA-Z]{3,})$");    
+     
+    
+    mat = pat.matcher(correo);
+       if (mat.find()){
+       return true;
+    }else{
+        return false;
+    }
+}
+      
+    
     /**
      * @param args the command line arguments
      */
@@ -260,6 +300,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JInternalFrame IF_Login;
     private javax.swing.JButton jB_Acceder;
     private javax.swing.JButton jB_salirAplicacionLoguin;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
