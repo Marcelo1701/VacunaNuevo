@@ -954,7 +954,11 @@ public class VacunarGUI extends javax.swing.JFrame {
 
         if (confirm == JOptionPane.YES_OPTION) {
             // Cierra la aplicación
-            System.exit(0);
+            //System.exit(0);
+            dispose();
+            Login log=new Login();
+            log.setVisible(true);
+                      
         }
     }//GEN-LAST:event_MI_SalirActionPerformed
 
